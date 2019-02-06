@@ -1,0 +1,467 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!--[if IE 9 ]><html class="ie ie9" lang="en" class="no-js"> <![endif]-->
+<!--[if !(IE)]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+
+<head>
+	<title>WhiteHat Risk Management Dashboard</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="description" content="Kingboard - Bootstrap Admin Dashboard Theme">
+	<meta name="author" content="The Develovers">
+
+	<!-- CSS -->
+	<link href="{% static 'riskDashboard2/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'riskDashboard2/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'riskDashboard2/css/main.css' %}" rel="stylesheet" type="text/css">
+
+    <!-- skin -->
+    <link href="{% static 'riskDashboard2/css/skins/darkblue.css' %}" rel="stylesheet" type="text/css">
+
+	<!-- Fav and touch icons -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'riskDashboard2/ico/kingboard-favicon144x144.png' %}">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'riskDashboard2/ico/kingboard-favicon114x114.png' %}">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'riskDashboard2/ico/kingboard-favicon72x72.png' %}">
+	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="{% static 'riskDashboard2/ico/kingboard-favicon57x57.png' %}">
+	<link rel="shortcut icon" href="{% static 'riskDashboard2/ico/favicon.png' %}">
+
+</head>
+
+<body class="dashboard">
+	<!-- WRAPPER -->
+	<div class="wrapper">
+
+		<!-- TOP GENERAL ALERT
+		<div class="alert alert-info top-general-alert">
+			<span>The system has been upgraded to the new version. Click the <a href="#">release notes</a> to see the changes.</span>
+			<a type="button" class="close">&times;</a>
+		</div>
+		 END TOP GENERAL ALERT -->
+
+		<!-- TOP BAR -->
+		<div class="top-bar">
+			<div class="container">
+				<div class="row">
+					<!-- logo -->
+					<div class="col-md-2 logo">
+						<a href="index.html">
+							<img src="{% static 'riskDashboard2/img/WH_sm_alpha.png' %}" alt="WhiteHat Security" width="150" />
+						</a>
+						<h1 class="sr-only">WhiteHat Risk Dashboard</h1>
+					</div>
+					<!-- end logo -->
+					<div class="col-md-5">
+					    <!-- API form -->
+
+                        <form class="navbar-form" role="form" method="POST">
+                            <div class="form-group">
+                                <label for="inputApi" class="sr-only">Please enter your Sentinel API key: </label>
+                                <input type="text" class="form-control" name="apikey" id="apikey" size="40" placeholder="{{ apikey|default:'Please enter your Sentinel API key' }}">{% csrf_token %}
+                            </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+
+						<!-- <div id="tour-searchbox" class="input-group searchbox">
+							<input type="search" class="form-control" placeholder="enter keyword here...">
+							<span class="input-group-btn">
+							    <button class="btn btn-default" type="button"><i class="fa fa-sign-in"></i></button>
+							</span>
+						</div> -->
+						<!-- end API form -->
+                    </div>
+					<div class="col-md-5">
+						<div class="top-bar-right">
+							<!-- responsive menu bar icon -->
+							<a href="#" class="hidden-md hidden-lg main-nav-toggle"><i class="fa fa-bars"></i></a>
+							<!-- end responsive menu bar icon -->
+							<button type="button" id="restart-tour" class="btn btn-link" disabled="disabled"><i class="fa fa-refresh"></i> Restart Tour</button>
+						</div>
+						<!-- /top-bar-right -->
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /top -->
+
+
+		<!-- BOTTOM: LEFT NAV AND RIGHT MAIN CONTENT -->
+		<div class="bottom">
+			<div class="container">
+				<div class="row">
+					<!-- left sidebar -->
+					<div class="col-md-2 left-sidebar">
+
+						<!-- main-nav -->
+						<nav class="main-nav">
+
+							<ul class="main-menu">
+								<li class="active"><a href="index.html"><i class="fa fa-sitemap fa-fw"></i><span class="text">Enterprise Risk Management</span></a>
+								</li>
+								<li><a href="appmanagement.html"><i class="fa fa-desktop fa-fw"></i><span class="text">Application Risk Management</span></a>
+								</li>
+								<li><a href="#" class="js-sub-menu-toggle"><i class="fa fa-bar-chart-o fw"></i><span class="text">Metrics &amp; Reports</span>
+									<i class="toggle-icon fa fa-angle-left"></i></a>
+									<ul class="sub-menu ">
+										<li>
+											<a href="charts-statistics.html">
+												<span class="text">Remediation</span>
+											</a>
+										</li>
+										<li>
+											<a href="charts-statistics-interactive.html">
+												<span class="text">Interactive Charts</span>
+											</a>
+										</li>
+										<li>
+											<a href="charts-statistics-real-time.html">
+												<span class="text">Realtime Charts</span>
+											</a>
+										</li>
+										<li>
+											<a href="charts-d3charts.html">
+												<span class="text">Reports
+													<span class="badge element-bg-color-blue">Coming Soon</span>
+												</span>
+											</a>
+										</li>
+									</ul>
+								</li>
+								<li><a href="#" class="js-sub-menu-toggle"><i class="fa fa-gears fw"></i><span class="text">Settings</span>
+									<i class="toggle-icon fa fa-angle-left"></i></a>
+									<ul class="sub-menu ">
+										<li>
+											<a href="components-wizard.html">
+												<i class="fa fa-table fw"></i><span class="text">Impact Matrix</span>
+											</a>
+										</li>
+									</ul>
+								</li>
+
+							</ul>
+						</nav>
+						<!-- /main-nav -->
+
+						<div class="sidebar-minified js-toggle-minified">
+							<i class="fa fa-angle-left"></i>
+						</div>
+
+						<!-- sidebar content -->
+						<div class="sidebar-content">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h5><i class="fa fa-lightbulb-o"></i> Tips</h5>
+								</div>
+								<div class="panel-body">
+									<p>If you're just getting started check out the feature Tour in the top menu navigation.</p>
+								</div>
+							</div>
+
+							<h5 class="label label-default"><i class="fa fa-info-circle"></i> Server Info</h5>
+							<ul class="list-unstyled list-info-sidebar bottom-30px">
+								<li class="data-row">
+									<span class="data-name">Disk Space Usage</span>
+									<span class="data-value">
+										274.43 / 2 GB
+										<div class="progress progress-xs">
+											<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
+												<span class="sr-only">10%</span>
+											</div>
+										</div>
+									</span>
+								</li>
+								<li class="data-row">
+									<span class="data-name">Monthly Bandwidth Transfer</span>
+									<span class="data-value">
+										230 / 500 GB
+										<div class="progress progress-xs">
+											<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="46" aria-valuemin="0" aria-valuemax="100" style="width: 46%">
+												<span class="sr-only">46%</span>
+											</div>
+										</div>
+									</span>
+								</li>
+								<li class="data-row">
+									<span class="data-name">Database Disk Space</span>
+									<span class="data-value">219.45 MB</span>
+								</li>
+								<li class="data-row">
+									<span class="data-name">Operating System</span>
+									<span class="data-value">Linux</span>
+								</li>
+								<li class="data-row">
+									<span class="data-name">Apache Version</span>
+									<span class="data-value">2.4.6</span>
+								</li>
+								<li class="data-row">
+									<span class="data-name">PHP Version</span>
+									<span class="data-value">5.3.27</span>
+								</li>
+								<li class="data-row">
+									<span class="data-name">MySQL Version</span>
+									<span class="data-value">5.5.34-cll</span>
+								</li>
+								<li class="data-row">
+									<span class="data-name">Architecture</span>
+									<span class="data-value">x86_64</span>
+								</li>
+							</ul>
+						</div>
+						<!-- end sidebar content -->
+					</div>
+					<!-- end left sidebar -->
+
+					<!-- content-wrapper -->
+					<div class="col-md-10 content-wrapper">
+						<div class="row">
+							<div class="col-md-4">
+								<ul class="breadcrumb">
+									<li><i class="fa fa-home"></i><a href="#">Home</a>
+									</li>
+									<li class="active">Dashboard</li>
+								</ul>
+							</div>
+							<div class="col-md-8">
+								<div class="top-content">
+									<ul class="list-inline mini-stat">
+										<li>
+											<h5>LIKES
+												<span class="stat-value stat-color-orange"><i class="fa fa-plus-circle"></i> 81,450</span>
+											</h5>
+											<span id="mini-bar-chart1" class="mini-bar-chart"></span>
+										</li>
+										<li>
+											<h5>SUBSCRIBERS
+												<span class="stat-value stat-color-blue"><i class="fa fa-plus-circle"></i> 150,743</span>
+											</h5>
+											<span id="mini-bar-chart2" class="mini-bar-chart"></span>
+										</li>
+										<li>
+											<h5>CUSTOMERS
+												<span class="stat-value stat-color-seagreen"><i class="fa fa-plus-circle"></i> 43,748</span>
+											</h5>
+											<span id="mini-bar-chart3" class="mini-bar-chart"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+
+						<!-- main -->
+						<div class="content">
+							<div class="main-header">
+								<h2>Enterprise Risk Management</h2>
+								<em>dashboard</em>
+							</div>
+
+							<div class="main-content">
+								<div class="row">
+									<div class="col-md-9">
+										<!-- WIDGET NO HEADER -->
+										<div class="widget widget-hide-header">
+											<div class="widget-header hide">
+												<h3>Summary Info</h3>
+											</div>
+											<div class="widget-content">
+												<div class="row">
+													<div class="col-md-3">
+														<div class="easy-pie-chart green" data-percent="70">
+															<span class="percent">70</span>
+														</div>
+														<p class="text-center">Task Completion</p>
+													</div>
+													<div class="col-md-3">
+														<div class="easy-pie-chart red" data-percent="22">
+															<span class="percent">22</span>
+														</div>
+														<p class="text-center">Overall Project Completion</p>
+													</div>
+													<div class="col-md-3">
+														<div class="easy-pie-chart yellow" data-percent="65">
+															<span class="percent">65</span>
+														</div>
+														<p class="text-center">Disk Space Used</p>
+													</div>
+													<div class="col-md-3">
+														<div class="easy-pie-chart red" data-percent="87">
+															<span class="percent">87</span>
+														</div>
+														<p class="text-center">Bandwidth Used</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- WIDGET NO HEADER -->
+									</div>
+									<div class="col-md-3">
+
+                                        <ul id="sortable" class="list-group">
+                                          <li class="list-group-item" data-impact-class="Data Loss" data-impact-class-id="1" id="riskcategory"><span class="glyphicon glyphicon-move"></span> Data Loss</li>
+                                          <li class="list-group-item" data-impact-class="Brand Reputation" data-impact-class-id="2" id="riskcategory"><span class="glyphicon glyphicon-move"></span> Brand Reputation</li>
+                                          <li class="list-group-item" data-impact-class="Malware" data-impact-class-id="3" id="riskcategory"><span class="glyphicon glyphicon-move"></span> Malware</li>
+                                          <li class="list-group-item" data-impact-class="User Experience" data-impact-class-id="4" id="riskcategory"><span class="glyphicon glyphicon-move"></span> User Experience</li>
+                                          <li class="list-group-item" data-impact-class="Business Continuity" data-impact-class-id="5" id="riskcategory"><span class="glyphicon glyphicon-move"></span> Business Continuity</li>
+                                          <li class="list-group-item" data-impact-class="Intellectual Property" data-impact-class-id="6" id="riskcategory"><span class="glyphicon glyphicon-move"></span> Intellectual Property</li>
+                                          <li class="list-group-item" data-impact-class="Revenue" data-impact-class-id="7" id="riskcategory"><span class="glyphicon glyphicon-move"></span> Revenue Loss</li>
+                                        </ul>
+
+									</div>
+								</div>
+
+                                <!--<div class="widget">
+									<div class="widget-header">
+										<h3><i class="fa fa-sitemap"></i> Application Inventory</h3>
+                                        <em>- Vulnerabilities, Risks and Business Impacts</em>
+										<button type="button" class="btn btn-link btn-help"><i class="fa fa-question-circle"></i></button>
+										<ul class="nav nav-tabs pull-right">
+											<li class="active"><a href="#tab1" data-toggle="tab"><i class="fa fa-sitemap"></i> Sites</a></li>
+											<li><a href="#tab2" data-toggle="tab"><i class="fa fa-gear"></i> Tab 2</a></li>
+										</ul>
+									</div>
+									<div class="widget-content">
+										<div class="tab-content no-padding">
+											<div class="tab-pane fade in active" id="tab1">
+												<select multiple name="site" id="site" class="form-control" size="7">
+                                                    {% if sitedata.sites %}
+                                                    {% for site in sitedata.sites %}
+                                                    <option class="list-group-item" value="{{site.id}}">{{ site.label }}</option>
+                                                    {% endfor %}
+                                                    {% else %}
+                                                    <option class="list-group-item" disabled>Site List</option>
+                                                    {% endif %}
+                                                </select>
+											</div>
+											<div class="tab-pane fade" id="tab2">
+												Professionally maximize unique portals whereas out-of-the-box interfaces. Monotonectally optimize B2C communities through high-payoff methods of empowerment. Enthusiastically transition intermandated value whereas multidisciplinary portals. Credibly recaptiualize ethical ROI without stand-alone deliverables. Progressively extend progressive networks for one-to-one process improvements. Distinctively underwhelm resource sucking products and market-driven meta-services. Uniquely target granular bandwidth through compelling customer service. Dramatically mesh parallel initiatives.
+											</div>
+										</div>
+									</div>
+								</div>-->
+
+                                <!-- WIDGET TABLE -->
+								<div class="widget widget-table">
+									<div class="widget-header">
+										<h3><i class="fa fa-sitemap"></i> Application Inventory</h3>
+                                        <em>- Vulnerabilities, Risks and Business Impacts</em>
+										<button type="button" class="btn btn-link btn-help"><i class="fa fa-question-circle"></i></button>
+										<ul class="nav nav-tabs pull-right">
+											<li class="active"><a href="#tab1" data-toggle="tab"><i class="fa fa-sitemap"></i> Sites</a></li>
+											<li><a href="#tab2" data-toggle="tab"><i class="fa fa-gear"></i> Tab 2</a></li>
+										</ul>
+										<div class="btn-group widget-header-toolbar">
+											<div class="control-inline toolbar-item-group">
+												<span class="control-title">Web Applications:</span>
+												<div class="label label-success"><i class="fa fa-caret-up"></i> 3.5%</div>
+											</div>
+										</div>
+									</div>
+									<div class="widget-content">
+										<table id="site" class="table table-sorting table-striped table-hover datatable" cellpadding="0" cellspacing="0" width="100%">
+											<thead>
+												<tr>
+													<th>Site Label</th>
+													<th>Base URL</th>
+													<th>Service Line</th>
+													<th>Impact Distribution</th>
+												</tr>
+											</thead>
+											<tbody>
+												{% if sitedata.sites %}
+                                                    {% for site in sitedata.sites %}
+                                                        <tr>
+                                                            <td>{{site.label}}</td>
+                                                            <td>{{site.site_url}}</td>
+                                                            <td>{{site.service_level}}</td>
+                                                            <td></td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                {% else %}
+                                                <tr>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+												</tr>
+                                                {% endif %}
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<!-- END WIDGET TABLE -->
+
+							</div>
+							<!-- /main-content -->
+						</div>
+						<!-- /main -->
+					</div>
+					<!-- /content-wrapper -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- END BOTTOM: LEFT NAV AND RIGHT MAIN CONTENT -->
+
+		<!-- FOOTER -->
+		<footer class="footer">
+			&copy; 2014
+		</footer>
+		<!-- END FOOTER -->
+
+	</div>
+	<!-- /wrapper -->
+
+	<!-- Javascript -->
+	<script type="text/javascript" src="{% static 'riskDashboard2/js/jquery-2.1.0.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'riskDashboard2/js/jquery-ui-1.10.4.custom.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'riskDashboard2/js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'riskDashboard2/js/modernizr.js' %}"></script>
+    <script type="text/javascript" src="{% static 'riskDashboard2/js/impactmatrix.js' %}"></script>
+	<script type="text/javascript" src="{% static 'riskDashboard2/js/bootstrap-tour.custom.js' %}"></script>
+	<script type="text/javascript" src="{% static 'riskDashboard2/js/king-common.js' %}"></script>
+    <script type="text/javascript" src="{% static 'riskDashboard2/js/deliswitch.min.js' %}"></script> <!-- ? -->
+	<script type="text/javascript" src="{% static 'riskDashboard2/js/stat/jquery.easypiechart.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'riskDashboard2/js/raphael-2.1.0.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'riskDashboard2/js/stat/flot/jquery.flot.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'riskDashboard2/js/stat/flot/jquery.flot.resize.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'riskDashboard2/js/stat/flot/jquery.flot.time.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'riskDashboard2/js/stat/flot/jquery.flot.pie.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'riskDashboard2/js/stat/flot/jquery.flot.tooltip.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'riskDashboard2/js/jquery.sparkline.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'riskDashboard2/js/datatable/jquery.dataTables.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'riskDashboard2/js/datatable/jquery.dataTables.bootstrap.js' %}"></script>
+	<script type="text/javascript" src="{% static 'riskDashboard2/js/jquery.mapael.js' %}"></script>
+	<script type="text/javascript" src="{% static 'riskDashboard2/js/maps/usa_states.js' %}"></script>
+	<script type="text/javascript" src="{% static 'riskDashboard2/js/king-chart-stat.js' %}"></script>
+	<script type="text/javascript" src="{% static 'riskDashboard2/js/king-table.js' %}"></script>
+	<script type="text/javascript" src="{% static 'riskDashboard2/js/king-components.js' %}"></script>
+
+    <script>
+        $("#getvulndata").click(function(){
+          $.post("/riskdashboard/getdata",
+          {
+            apikey:"{{apikey}}",
+            site:$('#site').val()[0]
+          },
+
+          function(data,status){
+            $('#vulndata').html(data);
+            $("#vulntable").trigger('update');
+            window.data=data;
+          });
+
+        });
+
+        $( "#sortable" ).sortable();
+        $( "#sortable" ).disableSelection();
+
+    </script>
+
+</body>
+
+</html>
